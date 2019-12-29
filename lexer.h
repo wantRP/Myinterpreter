@@ -25,7 +25,7 @@ void parse(char* s){
 			printf("ILLEGAL CHARACTER: %c\n",c);
 			++i;
 		} else{
-
+		;
 		}
 	}
 
