@@ -1,7 +1,7 @@
-﻿// inter.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
-//
-
-#include <iostream>
+﻿#include <bits/stdc++.h>
+#include "lexer.h"
 int main(){
-    std::cout << "Hello Word!\n";
+  char s[256];
+  gets_s(s);
+  parse(s);
 }
