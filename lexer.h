@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 #define pb push_back
 const std::set<std::string>delimiter{":=","=","+","-","*","/",";","<>"};
-const std::set<std::string>keyword{"begin","end","integer","bool","read","write","for","while","do","if","and","then","or","not","var","true","false","else"};
+const std::set<std::string>keyword{"begin","end","int","bool","read","write","for","while","do","if","and","then","or","not","var","true","false","else"};
 const std::set<char>otherchar{',',' ','=','+','-','*','/','<','>',':','(',')',';'};
 std::vector<std::string>originalwords;
 std::vector<std::string>words;
