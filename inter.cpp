@@ -11,4 +11,5 @@ int main(){
   for(auto i:words) std::cout<<i<<std::endl;
   printf("\n-------\n");
   for(auto i:parsermessage) std::cout<<i<<std::endl;
+  for(auto i:words2) std::cout<<i.first<<","<<i.second<<std::endl;
 }
