@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include "lexer.h"
+/*
 int main(){
   char s[256];
   //gets(s);
@@ -13,3 +14,4 @@ int main(){
   for(auto i:parsermessage) std::cout<<i<<std::endl;
   for(auto i:words2) std::cout<<i.first<<","<<i.second<<std::endl;
 }
+*/

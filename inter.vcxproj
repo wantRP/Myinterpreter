@@ -101,7 +101,7 @@
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
@@ -148,9 +148,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="inter.cpp" />
+    <ClCompile Include="opAnalyze.cpp" />
+    <ClCompile Include="syntax.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lexer.h" />
+    <ClInclude Include="syntax.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
