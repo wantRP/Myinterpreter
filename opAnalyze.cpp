@@ -13,6 +13,7 @@ void init(){
 	freopen("syn.txt","r",stdin);
 	while(std::cin>>c>>s) rules.push_back(make_pair(c,s));
 	fclose(stdin);
+	
 
 }
 void mark(std::pair<char,char>pair,std::stack<std::pair<char,char> >&v,std::map<char,std::set<char> >&m){
@@ -66,11 +67,11 @@ void getvt(){
 	for(auto r:rules)
 		for(int j=0;j<r.second.size();++j) if(!isupper(r.second[j])) vt.insert(r.second[j]);
 }
-void opanalyze(){
+void opanalyze(std::string str){
 	char s[122];
 	std::vector<char>queue;
 	std::vector<char>stack;
-	strcpy(s, "i+i*i");
+	strcpy(s, str.c_str());
 	for(int i=0;i<strlen(s);++i) queue.push_back(s[i]);
 	queue.push_back('#');
 	stack.push_back('#');
@@ -78,7 +79,7 @@ void opanalyze(){
 	int j;
 	do{
 		j=stack.size()-1;
-		printf("loop\n");
+		//printf("loop\n");
 		for(auto i:stack) printf("%c",i);
 		printf("\t");
 		for(auto i:queue) printf("%c",i);
@@ -86,27 +87,26 @@ void opanalyze(){
 		a=queue[0];
 		if(isvt(stack[j]));else j=j-1;
 		while(table[std::make_pair(stack[j],a)]==phigh){
-			printf("replace\n");
+			//printf("replace\n");
 			char q;
 			do{
 				q=stack[j];
 				isvt(stack[j-1])?j=j-1:j=j-2;
 				if(table[std::make_pair(stack[j],q)]==plow) break;
 			}while(1);
-			printf("appear j=%d s[j]=%c q=%c\n",j,stack[j],q);
+			//printf("appear j=%d s[j]=%c q=%c\n",j,stack[j],q);
 			std::string sr="";
 			for(int k=j+1;k<stack.size();++k) sr=sr+stack[k];
-			std::cout<<"find "<<sr<<std::endl;
+			//std::cout<<"find "<<sr<<std::endl;
 			char cl;
 			for(auto k:rules) if(k.second==sr){
-				printf("use rule %c->%s\n",k.first,k.second.c_str());
+				//printf("use rule %c->%s\n",k.first,k.second.c_str());
 				cl=k.first;
 				break;
 			}
 			int l=sr.size();
 			stack.erase(stack.begin()+j+1,stack.begin()+j+1+l);
 			stack.push_back(cl);
-			printf("reped:");
 			for(auto i:stack) printf("%c",i);
 		printf("\t");
 		for(auto i:queue) printf("%c",i);
@@ -121,6 +121,8 @@ void opanalyze(){
 	
 }
 int main(){
+	char s[233];
+	std::cin>>s;
 	init();
 	for(auto i:rules) std::cout<<i.first<<" "<<i.second<<std::endl;
 	getvt();
@@ -151,5 +153,7 @@ int main(){
 		for(auto j:vt) printf("%c",table[std::make_pair(i,j)]);
 		printf("\n");
 	}
-	opanalyze();
+	freopen("CON","r",stdin);
+	
+	opanalyze(s);
 }
