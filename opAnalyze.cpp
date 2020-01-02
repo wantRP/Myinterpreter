@@ -19,7 +19,6 @@ void init(){
 void mark(std::pair<char,char>pair,std::stack<std::pair<char,char> >&v,std::map<char,std::set<char> >&m){
 	char p=pair.first;
 	char a=pair.second;
-	//printf("%c %c$\n",p,a);
 	if(!m[p].count(a)){
 		m[p].insert(a);
 		v.push(pair);
@@ -67,7 +66,7 @@ void getvt(){
 	for(auto r:rules)
 		for(int j=0;j<r.second.size();++j) if(!isupper(r.second[j])) vt.insert(r.second[j]);
 }
-void opanalyze(std::string str){
+bool opanalyze(std::string str){
 	char s[122];
 	std::vector<char>queue;
 	std::vector<char>stack;
@@ -79,28 +78,23 @@ void opanalyze(std::string str){
 	int j;
 	do{
 		j=stack.size()-1;
-		//printf("loop\n");
 		for(auto i:stack) printf("%c",i);
 		printf("\t");
 		for(auto i:queue) printf("%c",i);
-		printf("\n");
+		printf("\tmove\n");
 		a=queue[0];
 		if(isvt(stack[j]));else j=j-1;
 		while(table[std::make_pair(stack[j],a)]==phigh){
-			//printf("replace\n");
 			char q;
 			do{
 				q=stack[j];
 				isvt(stack[j-1])?j=j-1:j=j-2;
 				if(table[std::make_pair(stack[j],q)]==plow) break;
 			}while(1);
-			//printf("appear j=%d s[j]=%c q=%c\n",j,stack[j],q);
 			std::string sr="";
 			for(int k=j+1;k<stack.size();++k) sr=sr+stack[k];
-			//std::cout<<"find "<<sr<<std::endl;
 			char cl;
 			for(auto k:rules) if(k.second==sr){
-				//printf("use rule %c->%s\n",k.first,k.second.c_str());
 				cl=k.first;
 				break;
 			}
@@ -110,17 +104,17 @@ void opanalyze(std::string str){
 			for(auto i:stack) printf("%c",i);
 		printf("\t");
 		for(auto i:queue) printf("%c",i);
-		printf("\n");
+		printf("\treplace\n");
 		}
 		if(table[std::mp(stack[j],a)]==plow||table[std::mp(stack[j],a)]==pequal){
 			
 			stack.push_back(a);
 			queue.erase(queue.begin());
-		}else{printf("ERRRRR");return;}
+		}else{printf("ERRRRR");return 0;}
 	}while(a!='#');
-	
+	return 1;
 }
-int main(){
+int qmain(){
 	char s[233];
 	std::cin>>s;
 	init();
@@ -131,20 +125,6 @@ int main(){
 	getfirstvt();
 	getlastvt();
 	maketable();
-	/*
-	printf("---firstvt---\n");
-	for(auto i:firstvt){
-		std::cout<<i.first<<" ";
-		for(auto j:i.second) std::cout<<j;
-		printf("\n");
-	}
-	printf("---lastvt----\n");
-	for(auto i:lastvt){
-		std::cout<<i.first<<" ";
-		for(auto j:i.second) std::cout<<j;
-		printf("\n");
-	}
-	*/
 	printf("----table----\n ");
 	for(auto i:vt) printf("%c",i);
 	printf("\n");
@@ -155,5 +135,6 @@ int main(){
 	}
 	freopen("CON","r",stdin);
 	
-	opanalyze(s);
+	if(opanalyze(s))printf("success");else printf("error");
+	return 1;
 }

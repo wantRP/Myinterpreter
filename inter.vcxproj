@@ -150,6 +150,7 @@
     <ClCompile Include="inter.cpp" />
     <ClCompile Include="opAnalyze.cpp" />
     <ClCompile Include="syntax.cpp" />
+    <ClCompile Include="trnslate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lexer.h" />
