@@ -87,10 +87,11 @@ void opanalyze(){
 	//init ok
 	while(q.front!='#'){
 		char a=q.front();
-		char rightvt=isupper(stack[stack.size()-1])?stack[stack.size()-1]:stack[stack.size()-2];
-		//while(table(std::mp(rightvt,a)==phigh){
-
-		//}
+		int j=q.size()-1;
+		if()
+		do{
+			
+		}while(table(std::mp(rightvt,a)==phigh)
 
 		if(table(std::mp(vstack,a))==plow||table(std::mp(vstack,a))==pequal){
 			stack.push_back(a);
