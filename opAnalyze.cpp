@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 #define mp make_pair
-typedef enum{pundefined='E',plow='<',phigh='>',pequal='='}pr;
+typedef enum proty{pundefined='E',plow='<',phigh='>',pequal='='}priority;
 /*typedef struct{
 	enum {
 		vt=0,vi
@@ -11,7 +11,7 @@ typedef enum{pundefined='E',plow='<',phigh='>',pequal='='}pr;
 std::vector<symbols>rightpart;
 std::pair<int,std::string>rules;
 */
-std::map<std::pair<char,char>,pr>table;
+std::map<std::pair<char,char>,priority>table;
 std::set<char>vt;
 std::vector<std::pair<char,std::string>>rules;
 std::map<char,std::set<char>>firstvt,lastvt;
@@ -39,10 +39,10 @@ void getfirstvt(){
 		if(!isupper(r.second[0])) mark(std::mp(r.first,r.second[0]),sfirstvt,firstvt);
 			else if(r.second[1]&&!islower(r.second[1])) mark(std::mp(r.first,r.second[1]),sfirstvt,firstvt);
 	while(!sfirstvt.empty()){
-		std::pair<char,char>pr;
-		pr=sfirstvt.top();//(Q,a)
+		std::pair<char,char>priority;
+		priority=sfirstvt.top();//(Q,a)
 		sfirstvt.pop();
-		for(auto i:rules) if(i.second[0]==pr.first) mark(std::make_pair(i.first,pr.second),sfirstvt,firstvt);
+		for(auto i:rules) if(i.second[0]==priority.first) mark(std::make_pair(i.first,priority.second),sfirstvt,firstvt);
 	}
 }
 void getlastvt(){//OK
@@ -54,10 +54,10 @@ void getlastvt(){//OK
 			else if((l>1) && (!isupper(a[l-2]))) mark(std::mp(p,a[l-2]),slastvt,lastvt);
 	}
 	while(!slastvt.empty()){
-		std::pair<char,char>pr;
-		pr=slastvt.top();
+		std::pair<char,char>priority;
+		priority=slastvt.top();
 		slastvt.pop();
-		for(auto i:rules) if(i.second.back()==pr.first) mark(std::mp(i.first,pr.second),slastvt,lastvt);
+		for(auto i:rules) if(i.second.back()==priority.first) mark(std::mp(i.first,priority.second),slastvt,lastvt);
 	}
 }
 void maketable(){//OK
@@ -74,6 +74,30 @@ void maketable(){//OK
 void getvt(){
 	for(auto r:rules)
 		for(int j=0;j<r.second.size();++j) if(!isupper(r.second[j])) vt.insert(r.second[j]);
+}
+void opanalyze(){
+	char s[122];
+	std::queue<char>q;
+	std::vector<char>stack;
+	strcpy(s, "i+i");
+	for(int i=0;i<strlen(s);++i) q.push(s[i]);
+	q.push('#');
+	stack.push_back('#');
+	char vtstack='#';
+	//init ok
+	while(q.front!='#'){
+		char a=q.front();
+		char rightvt=isupper(stack[stack.size()-1])?stack[stack.size()-1]:stack[stack.size()-2];
+		//while(table(std::mp(rightvt,a)==phigh){
+
+		//}
+
+		if(table(std::mp(vstack,a))==plow||table(std::mp(vstack,a))==pequal){
+			stack.push_back(a);
+			q.pop();
+		}else
+
+	}
 }
 int main(){
 	init();
