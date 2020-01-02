@@ -1,21 +1,12 @@
 #include<bits/stdc++.h>
 #define mp make_pair
 typedef enum proty{pundefined='E',plow='<',phigh='>',pequal='='}priority;
-/*typedef struct{
-	enum {
-		vt=0,vi
-	} type=vt;
-	std::string content;
-	int num=0;
-}symbols;
-std::vector<symbols>rightpart;
-std::pair<int,std::string>rules;
-*/
 std::map<std::pair<char,char>,priority>table;
 std::set<char>vt;
 std::vector<std::pair<char,std::string>>rules;
 std::map<char,std::set<char>>firstvt,lastvt;
 std::stack<std::pair<char,char> >sfirstvt,slastvt;
+bool isvt(char c){ return (!isupper(c));}
 void init(){
 	char c;
 	std::string s;
@@ -77,27 +68,57 @@ void getvt(){
 }
 void opanalyze(){
 	char s[122];
-	std::queue<char>q;
+	std::vector<char>queue;
 	std::vector<char>stack;
-	strcpy(s, "i+i");
-	for(int i=0;i<strlen(s);++i) q.push(s[i]);
-	q.push('#');
+	strcpy(s, "i+i*i");
+	for(int i=0;i<strlen(s);++i) queue.push_back(s[i]);
+	queue.push_back('#');
 	stack.push_back('#');
-	char vtstack='#';
-	//init ok
-	while(q.front!='#'){
-		char a=q.front();
-		char rightvt=isupper(stack[stack.size()-1])?stack[stack.size()-1]:stack[stack.size()-2];
-		//while(table(std::mp(rightvt,a)==phigh){
-
-		//}
-
-		if(table(std::mp(vstack,a))==plow||table(std::mp(vstack,a))==pequal){
+	char a='#';
+	int j;
+	do{
+		j=stack.size()-1;
+		printf("loop\n");
+		for(auto i:stack) printf("%c",i);
+		printf("\t");
+		for(auto i:queue) printf("%c",i);
+		printf("\n");
+		a=queue[0];
+		if(isvt(stack[j]));else j=j-1;
+		while(table[std::make_pair(stack[j],a)]==phigh){
+			printf("replace\n");
+			char q;
+			do{
+				q=stack[j];
+				isvt(stack[j-1])?j=j-1:j=j-2;
+				if(table[std::make_pair(stack[j],q)]==plow) break;
+			}while(1);
+			printf("appear j=%d s[j]=%c q=%c\n",j,stack[j],q);
+			std::string sr="";
+			for(int k=j+1;k<stack.size();++k) sr=sr+stack[k];
+			std::cout<<"find "<<sr<<std::endl;
+			char cl;
+			for(auto k:rules) if(k.second==sr){
+				printf("use rule %c->%s\n",k.first,k.second.c_str());
+				cl=k.first;
+				break;
+			}
+			int l=sr.size();
+			stack.erase(stack.begin()+j+1,stack.begin()+j+1+l);
+			stack.push_back(cl);
+			printf("reped:");
+			for(auto i:stack) printf("%c",i);
+		printf("\t");
+		for(auto i:queue) printf("%c",i);
+		printf("\n");
+		}
+		if(table[std::mp(stack[j],a)]==plow||table[std::mp(stack[j],a)]==pequal){
+			
 			stack.push_back(a);
-			q.pop();
-		}else
-
-	}
+			queue.erase(queue.begin());
+		}else({printf("ERRRRR");return;});
+	}while(a!='#');
+	
 }
 int main(){
 	init();
@@ -108,6 +129,7 @@ int main(){
 	getfirstvt();
 	getlastvt();
 	maketable();
+	/*
 	printf("---firstvt---\n");
 	for(auto i:firstvt){
 		std::cout<<i.first<<" ";
@@ -120,6 +142,7 @@ int main(){
 		for(auto j:i.second) std::cout<<j;
 		printf("\n");
 	}
+	*/
 	printf("----table----\n ");
 	for(auto i:vt) printf("%c",i);
 	printf("\n");
@@ -128,4 +151,5 @@ int main(){
 		for(auto j:vt) printf("%c",table[std::make_pair(i,j)]);
 		printf("\n");
 	}
+	opanalyze();
 }
