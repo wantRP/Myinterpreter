@@ -116,7 +116,7 @@ void opanalyze(std::string str){
 			
 			stack.push_back(a);
 			queue.erase(queue.begin());
-		}else({printf("ERRRRR");return;});
+		}else{printf("ERRRRR");return;}
 	}while(a!='#');
 	
 }
