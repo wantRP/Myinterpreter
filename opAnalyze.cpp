@@ -7,7 +7,7 @@ std::set<char>vt;
 std::vector<std::pair<char,std::string>>rules;
 std::map<char,std::set<char>>firstvt,lastvt;
 std::stack<std::pair<char,char> >sfirstvt,slastvt;
-std::vector<std::tuple<std::string,std::string,std::string,std::string>>tuplelist;
+std::vector<std::tuple<char,char,char,char>>tuplelist;
 bool isvt(char c){ return (!isupper(c)); }
 void init(){
 	char c;
@@ -95,14 +95,28 @@ bool opanalyze(std::string str){
 			} while(1);
 			std::string sr="";
 			for(int k=j+1;k<stack.size();++k) sr=sr+stack[k];
-			//std::cout<<"sr="<<sr<<std::endl;
 			char cl;
+
 			for(auto k:rules) if(k.second==sr){
 				cl=k.first;
 				break;
 			}
 			int l=sr.size();
 			//----------
+			if(sr.length()==3&&(!isupper(sr[1]))){
+				char t[5];
+				t[0]=sr[1];
+				t[1]=sr[0];
+				//if(!isupper(t[0])) break;
+				t[2]=sr[2];
+				t[3]=cl;
+				for(int jj=0;jj<=2;++jj)
+					for(auto ii:rules) if(ii.first==t[jj]&&ii.second.size()==1&&isvt(ii.second[0])){
+						t[jj]=ii.second[0];
+					}
+				tuplelist.push_back(std::make_tuple(t[0],t[1],t[2],t[3]));
+				//printf("!!!(%c,%c,%c,%c)!!!",t[0],t[1],t[2],t[3]);
+			}
 			stack.erase(stack.begin()+j+1,stack.begin()+j+1+l);
 			stack.push_back(cl);
 			kk=j+1;
@@ -142,7 +156,7 @@ int main(){
 	}
 	freopen("CON","r",stdin);
 
-	if(opanalyze(s))printf("success");//else printf("error");
-
+	if(opanalyze(s))printf("success\n");//else printf("error");
+	for(auto i:tuplelist) printf("(%c,%c,%c,%c)\n",std::get<0>(i),std::get<1>(i),std::get<2>(i),std::get<3>(i));
 	return 0;
 }

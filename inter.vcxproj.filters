@@ -21,10 +21,10 @@
     <ClCompile Include="syntax.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="opAnalyze.cpp">
+    <ClCompile Include="trnslate.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="trnslate.cpp">
+    <ClCompile Include="opAnalyze.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

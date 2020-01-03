@@ -2,6 +2,7 @@
 #define pb push_back
 #define mp std::make_pair
 const std::set<std::string>delimiter{":=","=","+","-","*","/",";","<>"};
+const std::set<std::string>varlist;
 const std::set<std::string>keyword{"begin","end","int","bool","read","real","write","for","to","while","do","if","and","then","or","not","var","true","false","else"};
 const std::map<std::string,int>innercode={{"begin",1},{"end",2},{"int",3},{"bool",4},{"for",12},{"to",13},{"true",21},{"false",22},{"var",23},{"+",25},
 				{"-",26},{"*",27},{"/",28},{"=",29},{"and",32},{":=",28},{"id",39},{"tint",40},{"treal",41},{"bool",43},{"(",44},{")",45},{";",48} };
