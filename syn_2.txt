@@ -1,0 +1,7 @@
+E (T)
+E i
+T E^E
+T E*E
+T E+E
+T E*T
+S #T#

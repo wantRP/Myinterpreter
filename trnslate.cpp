@@ -1,3 +1,4 @@
+
 #include<iostream> 
 #include<string> 
 using namespace std;
@@ -26,21 +27,20 @@ int CharToDigital(char ch);
 void DispItem(int i);
 void DispIndirect(int i);
 int Merge(int* ch,int ll);
-void ToDigital(int digital[],char str[],int& d_len,int len);
+void ToDigital(int digital[],char str[],int& d_len);
 typedef class four_item
 {
 	char op;
 	int s1,s2,s3;
 public:
 	four_item(){}
-	four_item(int op,int  s1,int  s2)
-	{
+	four_item(int op,int  s1,int  s2){
 		this->op=cost[0][op];
 		this->s1=s1;
 		this->s2=s2;
 		this->s3=Fp+300;//metion +100 ,+200,+300 
-	}  void DispSample()
-	{
+	} 
+	void DispSample(){
 		cout<<"(";
 		if(op=='!')
 			cout<<"**";
@@ -141,9 +141,9 @@ int SearchCost(int i,int j)//set the realiton according to the cost
 }
 int Entry(char ch)
 {
-	for(int i=1;i<Sign[0];i++)//find the no of variable,or add it to tail
-		if(Sign[i]==ch)
-			return i+100;
+//	for(int i=1;i<Sign[0];i++)//find the no of variable,or add it to tail
+//		if(Sign[i]==ch)
+//			return i+100;
 	Sign[++Sp]=ch;
 	return Sp+100;
 }
@@ -242,8 +242,9 @@ int Merge(int* ch,int ll)
 		exit(0);
 	}
 }
-void ToDigital(int digital[],char str[],int& d_len,int len)//convert char to number in table
+void ToDigital(int digital[],char str[],int& d_len)//convert char to number in table
 {
+	int len=strlen(str);
 	for(int i=0;i<len;i++){
 		digital[d_len]=CharToDigital(str[i]);//if illigal character, throw
 		if(digital[d_len]==0){
@@ -257,7 +258,7 @@ void ToDigital(int digital[],char str[],int& d_len,int len)//convert char to num
 	}
 }
 
-void main()
+void tmain()
 {
 	char string[MAX];                    //for the sentence to be ananlyse
 	int* ch=new int[MAX];                        //the mergeing string                     
@@ -274,8 +275,7 @@ void main()
 	int l=strlen(string);
 	string[l]='#';
 	string[l+1]='\0';
-	int originallen=strlen(string);
-	ToDigital(Digital,string,Dp,originallen); //to digial
+	ToDigital(Digital,string,Dp); //convert char to number of vt in table save in Digital
 	cout<<"**********************************************************"<<endl;
 	cout<<"The stack:"<<'\t'<<"The action:"<<'\t'<<'\t'<<"Produce or not:"<<endl;
 	s.PushStack(7);//push '#'
@@ -284,13 +284,13 @@ void main()
 	statopvt=statop;
 	a=Digital[0];
 	while(a!=7)                        //The analysing progress is as following:
-	{                                    //iftheletter'spriorityislitterthanthe top  start merge                                  
+	{                                    //iftheletter's priority is litter thanthe top  start merge                                  
 		a=Digital[strp];                     // get the letter
 		if(s.GetChar(statop)<200)
 			statopvt=statop;
 		else
 			statopvt=statop-1;
-		//push
+		//> is 1, < is -1, = is 0,un=2
 		while(a<200&&(SearchCost(s.GetChar(statopvt),a)==1))//the topvt is greater than the letter the can not push then merge
 		{
 			s.DispStack();                            //show the stack before merging
@@ -306,7 +306,7 @@ void main()
 			}
 			int start=s.Getsize();
 			lowpos++;
-			int length=start-lowpos;
+			int length=start-lowpos;//merge
 			s.PushStack(Merge(ch,length));
 
 			statopvt=s.Getsize()-1;
@@ -320,7 +320,7 @@ void main()
 			exit(0);
 		} else{
 			s.DispStack();
-			cout<<"Move into:";
+			cout<<"push:";
 			DispItem(a);
 			cout<<endl;
 			s.PushStack(a);
@@ -343,3 +343,4 @@ void main()
 	}
 	cout<<"***********************************************"<<endl;
 }
+

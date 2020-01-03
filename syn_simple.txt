@@ -1,0 +1,4 @@
+S #E#
+F i
+T F*F
+E F+T
