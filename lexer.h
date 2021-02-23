@@ -86,5 +86,4 @@ void parse(char* s){
 			i=i+1;
 		}
 	}
-
 }

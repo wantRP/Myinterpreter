@@ -28,8 +28,7 @@ void DispItem(int i);
 void DispIndirect(int i);
 int Merge(int* ch,int ll);
 void ToDigital(int digital[],char str[],int& d_len);
-typedef class four_item
-{
+typedef class four_item{
 	char op;
 	int s1,s2,s3;
 public:
@@ -343,4 +342,3 @@ void tmain()
 	}
 	cout<<"***********************************************"<<endl;
 }
-
