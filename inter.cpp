@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #include "lexer.h"
 
-int main(){
+int tmain(){
   char s[512];
   //gets(s);
   freopen("pas.pas","r",stdin);
@@ -19,4 +19,5 @@ int main(){
   printf("\n-------\n");
   for(auto i:parsermessage) std::cout<<i<<std::endl;
   for(auto i:words2) std::cout<<i.first<<","<<i.second<<std::endl;
+  return 0;
 }

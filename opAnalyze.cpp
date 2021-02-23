@@ -12,7 +12,7 @@ bool isvt(char c){ return (!isupper(c)); }
 void init(){
 	char c;
 	std::string s;
-	freopen("syn_2.txt","r",stdin);
+	freopen("syn_simple.txt","r",stdin);
 	while(std::cin>>c>>s) rules.push_back(make_pair(c,s));
 	fclose(stdin);
 
